@@ -1,4 +1,4 @@
-# docker-jnlp-slave
+# jenkins-velocity
 
 Jenkins jnlp agent with Docker CLI, Node 8.x, and MongoDb 3.6
 
