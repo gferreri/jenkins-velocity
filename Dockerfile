@@ -14,6 +14,8 @@ RUN apt-get -y update \
     && apt-get -y update \
     && apt-get -y install docker-ce
 
+# INSTALL NODE
+
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 
 RUN apt-get install nodejs
@@ -26,6 +28,21 @@ RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" |
     && mkdir /data \
     && mkdir /data/db \
     && mkdir /data/db/log
+
+# SONARQUBE
+
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip \
+    && unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+
+RUN mv sonar-scanner-3.2.0.1227-linux /opt/sonar \
+    && ls /opt/sonar \
+    && export PATH=$PATH:/opt/sonar/bin \
+    && chmod u+x -R /opt/sonar/bin \
+    && rm /opt/sonar/conf/sonar-scanner.properties
+
+COPY ./sonar-scanner.properties /opt/sonar/conf/
+
+# ENTRYPOINT
 
 COPY ./entrypoint.sh /
 
