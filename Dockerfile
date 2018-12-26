@@ -9,7 +9,7 @@ ENV SONAR_SCANNER_VERSION="3.2.0.1227"
 ENV DEPENDENCY_CHECK_VERSION="3.3.4"
 
 RUN apt-get -y update \
-    && apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common \
+    && apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common build-essential \
     && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" \
     && apt-get -y update \
