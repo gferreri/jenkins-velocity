@@ -2,7 +2,7 @@ FROM jenkins/jnlp-slave:3.19-1
 
 ARG DOCKER_GID=497
 
-USER jenkins
+USER root
 
 ENV DOCKER_VERSION "18.03.1-ce"
 ENV SONAR_SCANNER_VERSION="3.2.0.1227"
@@ -20,6 +20,7 @@ RUN apt-get -y update \
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 
 RUN apt-get install nodejs
+
 RUN npm install -g npm@5.7.1
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
@@ -28,7 +29,8 @@ RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" |
     && apt-get install -y mongodb-org \
     && mkdir /data \
     && mkdir /data/db \
-    && mkdir /data/db/log
+    && mkdir /data/db/log \
+    && chown -R jenkins /data/db
 
 # SONARQUBE
 
@@ -55,7 +57,7 @@ RUN mv dependency-check /opt/dependency-check \
     && rm dependency-check-$DEPENDENCY_CHECK_VERSION-release.zip
 
 # ENTRYPOINT
-
+USER jenkins
 COPY ./entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
