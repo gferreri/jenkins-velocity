@@ -29,7 +29,8 @@ RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" |
     && apt-get install -y mongodb-org \
     && mkdir /data \
     && mkdir /data/db \
-    && mkdir /data/db/log
+    && mkdir /data/db/log \
+    && chown -R jenkins /data/db
 
 # SONARQUBE
 
