@@ -2,7 +2,7 @@ FROM jenkins/jnlp-slave:3.19-1
 
 ARG DOCKER_GID=497
 
-USER root
+USER jenkins
 
 ENV DOCKER_VERSION "18.03.1-ce"
 ENV SONAR_SCANNER_VERSION="3.2.0.1227"
