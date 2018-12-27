@@ -30,7 +30,7 @@ RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" |
     && mkdir /data \
     && mkdir /data/db \
     && mkdir /data/db/log \
-    && chown -R jenkins /data/db
+    && chown -R jenkins:jenkins /data/db
 
 # SONARQUBE
 
@@ -57,7 +57,6 @@ RUN mv dependency-check /opt/dependency-check \
     && rm dependency-check-$DEPENDENCY_CHECK_VERSION-release.zip
 
 # ENTRYPOINT
-USER jenkins
 COPY ./entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
