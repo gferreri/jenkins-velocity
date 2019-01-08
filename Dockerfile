@@ -30,6 +30,14 @@ RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" |
     && mkdir /data/db \
     && mkdir /data/db/log
 
+
+# INSTALL YARN
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN sudo apt-get update && sudo apt-get --no-install-recommends install yarn
+RUN yarn --version
+
 # SONARQUBE
 
 RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip \
