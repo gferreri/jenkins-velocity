@@ -39,7 +39,6 @@ RUN apt-get -y update && \
     echo yarn --version: $(yarn --version) && \
     # HELM
     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash && \
-    helm init --client-only && \
     echo helm version: $(helm version) && \
     # SONARQUBE
     wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip && \
