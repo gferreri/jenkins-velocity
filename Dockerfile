@@ -40,6 +40,8 @@ RUN apt-get -y update && \
     # HELM
     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash && \
     echo helm version: $(helm version) && \
+    # PIGZ
+    apt-get install pigz -y && \
     # SONARQUBE
     wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip && \
     unzip sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip && \
