@@ -7,6 +7,7 @@ USER root
 ENV DOCKER_VERSION "18.03.1-ce"
 ENV SONAR_SCANNER_VERSION="3.2.0.1227"
 ENV DEPENDENCY_CHECK_VERSION="3.3.4"
+ENV AWSCLI_VERSION="1.16.171"
 
 RUN apt-get -y update && \
     # DOCKER
@@ -56,7 +57,11 @@ RUN apt-get -y update && \
     mv dependency-check /opt/dependency-check && \
     export PATH=$PATH:/opt/dependency-checker/bin/dependency-check.sh && \
     chmod u+x -R /opt/dependency-check/bin && \
-    rm dependency-check-$DEPENDENCY_CHECK_VERSION-release.zip
+    rm dependency-check-$DEPENDENCY_CHECK_VERSION-release.zip && \
+    # AWSCLI
+    sudo apt-get install -y python3-pip && \
+    sudo pip3 install --upgrade awscli==$AWSCLI_VERSION && \
+    echo aws --version: $(aws --version)
 
 # ENTRYPOINT
 USER jenkins
