@@ -61,7 +61,9 @@ RUN apt-get -y update && \
     # AWSCLI
     sudo apt-get install -y python3-pip && \
     sudo pip3 install --upgrade awscli==$AWSCLI_VERSION && \
-    echo aws --version: $(aws --version)
+    echo aws --version: $(aws --version) && \
+    # HUB (https://github.com/github/hub)
+    HUB_DIST=linux-amd64 HUB_VERSION=`curl -w "%{url_effective}\n" -I -L -s -S github.com/github/hub/releases/latest -o /dev/null | awk -F'releases/tag/v' '{ print $2 }'`; curl "https://github.com/github/hub/releases/download/v$HUB_VERSION/hub-$HUB_DIST-$HUB_VERSION.tgz" -L | tar xvz && ./hub-$HUB_DIST-$HUB_VERSION/install && rm -r ./hub-$HUB_DIST-$HUB_VERSION
 
 # ENTRYPOINT
 USER jenkins
